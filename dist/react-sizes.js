@@ -1532,10 +1532,10 @@ var withSizes$1 = function withSizes() {
               fallbackHeight = _config$fallbackHeigh === undefined ? null : _config$fallbackHeigh,
               _config$fallbackWidth = config.fallbackWidth,
               fallbackWidth = _config$fallbackWidth === undefined ? null : _config$fallbackWidth,
-              _config$useFallbackIn = config.useFallbackInClient,
-              useFallbackInClient = _config$useFallbackIn === undefined ? false : _config$useFallbackIn;
+              _config$forceFallback = config.forceFallback,
+              forceFallback = _config$forceFallback === undefined ? false : _config$forceFallback;
 
-          return getWindowSizes({ fallbackHeight: fallbackHeight, fallbackWidth: fallbackWidth, forceFallback: useFallbackInClient });
+          return getWindowSizes({ fallbackHeight: fallbackHeight, fallbackWidth: fallbackWidth, forceFallback: forceFallback });
         };
 
         _this.getPropsToPass = function () {
@@ -1543,7 +1543,6 @@ var withSizes$1 = function withSizes() {
         };
 
         _this.state = {
-          initialSizes: _this.getWindowSizesWithFallback(),
           propsToPass: _this.getPropsToPass()
         };
         return _this;
@@ -1602,7 +1601,7 @@ var SizesProvider = function (_Component) {
       return defineProperty({}, contextKey, {
         fallbackWidth: config.fallbackWidth || null,
         fallbackHeight: config.fallbackHeight || null,
-        useFallbackInClient: config.useFallbackInClient || false,
+        forceFallback: config.forceFallback || false,
         throttle: config.throttle || 200
       });
     }
