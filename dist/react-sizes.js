@@ -625,11 +625,13 @@
     var _ref$fallbackWidth = _ref.fallbackWidth,
         fallbackWidth = _ref$fallbackWidth === void 0 ? null : _ref$fallbackWidth,
         _ref$fallbackHeight = _ref.fallbackHeight,
-        fallbackHeight = _ref$fallbackHeight === void 0 ? null : _ref$fallbackHeight;
+        fallbackHeight = _ref$fallbackHeight === void 0 ? null : _ref$fallbackHeight,
+        _ref$forceFallback = _ref.forceFallback,
+        forceFallback = _ref$forceFallback === void 0 ? false : _ref$forceFallback;
     var canUseDOM = typeof window !== 'undefined';
     return {
-      width: canUseDOM ? window.innerWidth : fallbackWidth,
-      height: canUseDOM ? window.innerHeight : fallbackHeight,
+      width: canUseDOM && !forceFallback ? window.innerWidth : fallbackWidth,
+      height: canUseDOM && !forceFallback ? window.innerHeight : fallbackHeight,
       canUseDOM: canUseDOM
     };
   };
@@ -687,10 +689,12 @@
 
   var getWindowSizesWithFallback = function getWindowSizesWithFallback(props) {
     var fallbackHeight = props.fallbackHeight,
-        fallbackWidth = props.fallbackWidth;
+        fallbackWidth = props.fallbackWidth,
+        forceFallback = props.forceFallback;
     return getWindowSizes({
       fallbackHeight: fallbackHeight,
-      fallbackWidth: fallbackWidth
+      fallbackWidth: fallbackWidth,
+      forceFallback: forceFallback
     });
   };
 
@@ -761,7 +765,8 @@
             var _this$props = this.props,
                 fallbackHeight = _this$props.fallbackHeight,
                 fallbackWidth = _this$props.fallbackWidth,
-                otherProps = _objectWithoutProperties(_this$props, ["fallbackHeight", "fallbackWidth"]);
+                forceFallback = _this$props.forceFallback,
+                otherProps = _objectWithoutProperties(_this$props, ["fallbackHeight", "fallbackWidth", "forceFallback"]);
 
             return React__default.createElement(WrappedComponent, _extends({}, otherProps, this.state.propsToPass));
           }
@@ -777,6 +782,8 @@
                 propsToPass: propsToPass
               };
             }
+
+            return null;
           }
         }]);
 
